@@ -1,2 +1,2 @@
 # dxquake3
-The main branch for DXQuake3, which is available @ http://www.dxquake3.dsl.pipex.com/
+DXQuake3, a Quake III engine in DirectX by Richard Geary http://www.dxquake3.dsl.pipex.com/
