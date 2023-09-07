@@ -125,7 +125,7 @@ void c_Game::Unload()
 
 	DQBSP.Unload();
 
-	for(i=0; i<MAX_SNAPSHOTS; ++i) DQDeleteArray( SnapshotArray[i].Ent );
+	for(int i=0; i<MAX_SNAPSHOTS; ++i) DQDeleteArray( SnapshotArray[i].Ent );
 
 	hDLL = NULL;
 	isLoaded = FALSE;
@@ -431,9 +431,9 @@ void c_Game::PrepareGameState()
 void c_Game::SendConfigStringUpdate()
 {
 	int i,num,pos,size;
-	s_ConfigStringUpdatePacket CSU;
+	s_ConfigStringUpdatePacket CSU{};
 	//CSU Compressed
-	BYTE OutputPacket[sizeof(s_ConfigStringUpdatePacket)];
+	BYTE OutputPacket[sizeof(s_ConfigStringUpdatePacket)]{};
 	BYTE *out;
 
 	num = 0;
@@ -582,6 +582,7 @@ void c_Game::LinkEntity(sharedEntity_t *Entity)
 void c_Game::UnlinkEntity(sharedEntity_t *Entity)
 {
 	int num = Entity->s.number;
+	int i = 0;
 
 	if(Entity->r.linked == qfalse) return;
 

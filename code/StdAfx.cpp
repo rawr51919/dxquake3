@@ -17,14 +17,14 @@ void WindowsErrorMessage(e_ErrorType ErrorType, const char *ErrorMessage, int Li
 
 	switch (ErrorType) {
 	case ERR_ASSERT:
-		sprintf(errtype, "Assert Error"); break;
+		sprintf_s(errtype, "Assert Error"); break;
 	case ERR_MEM:
-		sprintf(errtype, "Memory Error"); break;
+		sprintf_s(errtype, "Memory Error"); break;
 	default:
 		errtype[0] = '\0';
 	};
 
-	sprintf(text, "Error : %s\n\n%s\n\nline : %d\nfile : %s",errtype,ErrorMessage,Line,File);
+	sprintf_s(text, "Error : %s\n\n%s\n\nline : %d\nfile : %s",errtype,ErrorMessage,Line,File);
 	MessageBox(NULL, text, "DQ Error", MB_OK | MB_SYSTEMMODAL);
 	return;
 }

@@ -631,7 +631,7 @@ void c_Render::LoadShaders()
 		//Parse file list
 		pos = 0;
 		for(i=0;i<num;++i) {
-			sprintf( filename, "%s",&buffer[pos] );
+			sprintf_s( filename, "%s",&buffer[pos] );
 			DQStripExtention( filename, MAX_QPATH );
 			DQstrcat( filename, "\n", MAX_QPATH );
 			pos2 = DQstrlen( (char*)filename, MAX_QPATH );

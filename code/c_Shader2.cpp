@@ -372,6 +372,8 @@ BOOL c_Shader::LoadShaderFunc( char *line )
 //Puts the current Stage as the first of a new pass, and finalises the previous pass
 void c_Shader::AddRenderPass()
 {
+	s_TextureStage** x = nullptr;
+
 	//Put this current stage in a new pass
 	CurrentRenderPass->Next = DQNew( s_RenderPass );
 	CurrentRenderPass->Next->StageChain = CurrentStage;
@@ -379,7 +381,7 @@ void c_Shader::AddRenderPass()
 	//Stop the old pass from executing the first stage of the next pass
 	if(CurrentStage) {
 		for(s_TextureStage **x = &CurrentRenderPass->StageChain;(*x)->Next;x = &(*x)->Next) NULL;
-		*x = NULL;
+		*x = nullptr;
 	}
 	
 	//Update CurrentRenderPass

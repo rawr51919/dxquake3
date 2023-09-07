@@ -1,0 +1,261 @@
+8/7/03
+ - Shaders can Run, Reset and use Static vars
+ - Fix bug in Shader_Map::Initialise()
+ - Created Memory Manager, which logs all allocations and deallocations, and notifies
+    exactly where any memory leaks occur
+9/7/03
+ - Fixed crash bug in release version in Shader_AnimMap
+10/8/03
+ - Fixed bug in release version where gun was not rendering properly (due to bug in loading the tags!)
+11/8/03
+ - Initialised DirectSound and got working basic sound functionality
+ - Fixed Shader Render bug in UI (TSS_COLORARG2 for texstage0 needs to be initialised as TFACTOR)
+13/8/03
+ - Got Fragment Tesselation working!! Albeit with bugs
+14/8/03
+ - Fixed many fragment tesselation bugs
+15/8/03
+ - Fixed problem with non-solid stairs (trace shouldn't check ShaderFlag::Surfaceparm_NonSolid
+ - Fixed smooth stair stepping, and a lot of other event related bugs
+   - Problem was due to sending incorrect time-stamp on UserCmd's
+ - Noticed mysterious crash bug on exit, not inside my code. Possibly c_Sound related.
+ - Added DQNewCalls counter per frame. These calls seem to be the source of much slowdown
+16/8/03
+ - Weapons now collide with map (return entitynum through trace results)
+ - Fixed Poly Fragment bug (draw NumVerts-2 not NumVerts!!)
+ - Fixed Weapon explosion mark not displaying (RenderPoly needs a SetTransform( D3DRS_WORLD, identity) call )
+ - Fragments now don't draw on NoMark surfaces - only problem is fragment 'consumption' needs implementing
+   - Fragments also now draw with Sort = 6 (banner)
+17/8/03
+ - Started work on implementing DirectPlay
+ - Fixed Shader bug on bullet explosions (uses OverrideShader and ShaderTime)
+ - Optimized GetMarkFragment (got rid of dynamic allocations)
+18-23rd ON HOLIDAY
+23/8/03
+ - Fixed last bugs in new version of GetMarkFragment
+25/8/03
+ - Started work on displaying a console
+26/8/03
+ - Implemented Billboard rendering and fixed bugs
+27/8/03
+ - Implemented text string rendering
+ - Implemented console rendering. Now renders the console and text
+ - Began work on the console's carat and text editing
+ - Completed console carat, text editing and Tab Completion
+ - Fleshed out ExecuteString functionality - console nearing completion
+28/8/03
+ - Fixed Client Prediction bug (needed to implement SVF flags)
+29/8/03
+ - Clear Looping Sounds works now
+ - Fixed problems with EntitiesInBox and LinkEntity, so rocket launcher splash damage works
+ - Dropped weapons now pick up
+ - Players now sink into floor and disappear
+ - Worked on remaining trace bugs
+30/8/03
+ - Finally fixed stick-in-wall bug (c_BSP::CheckBrush)
+ - New bug causing NULL pointer in ShaderArray, occurs after about 20 seconds
+ - FINALLY fixed another stick-in-wall bug!! (that's the last of 'em) (offset+=EPSILON, c_BSP::CheckNode)
+ - Fixed random crashing bug - due to c_Input::KeyBuffer overflow
+ - Fixed random nolightmap problem (check c_BSP::isLoadedD3D)
+ - Fixed LowerCase bug which caused incorrect key assignments
+01/9/03
+ - Added Run/Walk functionality
+ - Added remaining console functionality (redo previous command and PGUP/PGDN scrolling)
+ - Implemented ZoomSensitivity and remaining Buttons
+ - Fixed bugs in UI key handling
+ - Fixed Exclusive CaptureMouse problem
+ - Implemented EnumHosts and UI's Server find/enumerate/ping facility
+02-04 ON HOLIDAY
+05/9/03
+ - Begin work on implementing DirectPlay Connect and Send between Server and Client
+ - Implemented Dedicated Server
+ - Implemented most of basic Network Play functionality
+06/9/03
+ - Implementing Network Play (DirectPlay)
+ - Redo UI rendering and menu opening correctly
+ - Fixed console rendering ontop of UI Main Menu
+ - Begin work on time synchronization problem
+07/9/03 - 8 hours
+ - Finish time synchronization solution
+ - Redo Client Snapshot to use array not dynamic chain
+ - Client now connects successfully to server (basic network functionality!)
+ - Fixed ShaderTime bug
+ - More than 1 client can now connect to server
+ - Fixed random orientation bug
+ - Clients spawn on ClientLoadedEvent
+08/9/03 - 9 hours
+ - Implemented localserver
+ - Fixed KeyCatch problem (rewrote console/UI key input)
+ - Compressed messages sent over network. Remote and local Clients now have only a small lag
+ - Send UserInfo on Client Connect (fixes many bugs)
+09/9/03 - 12 hours
+ - Reimplemented Win32 Keyboard and Mouse
+ - Fixed In-Game Menu
+ - Send ConfigString Update as a guaranteed compressed packet from Server to All Clients
+ - Send ServerCommands as a guaranteed message from server to clients, and attach to snapshot
+ - Checked CriticalSection Locks are valid
+ - Completely reworked Console Commands so commands are passed to the DLLs correctly
+10/9/03 - 5 hours
+ - Found and patched bugs in new c_Command and c_Console code
+ - Implemented Client->Server commands and Server->Client commands (last of Networking features)
+ - A ConfigStringUpdate from the server now correctly notifies the ClientGame
+ - Implemented colour Console text
+11/9/03 - 8 hours
+ - Delta-Compressed snapshot_t - Snapshot packet now roughly 0.7k from 7k
+ - Fixed drawing double characters (forceably don't send client as entity)
+ - Fixed GameEntity Trace (players can now be shot)
+12/9/03 - 6 hours
+ - Implemented Basic Exception Handling
+ - Added RT_SPRITE support
+13/9/03 - 2 hours
+ - Fixed RT_SPRITE AddBillboard to rotate about z axis
+ - Begin rewriting c_Shader
+14/9/03
+15/9/03 
+ - Re-implementing c_Shader with OverbrightBits
+16/9/03
+ - Debugging c_Shader & overBrightBits
+17 - 18/9/03 Moving to Oxford
+19/09/03 - 2 hours
+ - Fixed memory leak in new c_Shader
+ - Fixed BSP bug (2nd map wouldn't spawn player correctly)
+20/09/03 - 4 hours
+ - Researching possible rendering optimisations and reasons for current slowdowns
+21/09/03 - 10 hours
+ - Began work on implementing generic c_RenderStack
+22/09/03 - 10 hours
+ - Finished implementing basic c_RenderStack functionality
+ - Fixed Release Build only bug ( due to &MakeD3DXMatrixFromQ3(...) )
+23/09/03 - 6 hours
+ - Implemented DrawSprite and RenderConsole
+24/09/03 - 7 hours
+ - Implemented dynamic index buffer & basic SortStack
+25/09/03 - 8 hours
+ - Fixed many rendering bugs
+ - Removed Dynamic Indexing (too cumbersome). Trying more direct approach to DrawPrim & D3D call management
+ - Implemented working RenderStack!
+ - Fixed tcGen (needed Normal stream)
+ - Fixed Lightmap stage
+26/09/03 - 8 hours
+ - Implemented simple dynamic lighting (using additive lights)
+ - Attempted to fix lighting problem with alpha blended shaders, but it's not possible!
+ - Simplified c_Shader to pre-calculate RS & TSS's
+ - Fixed tcMod turb
+3/10/03
+ - Given up on lightvols for now. HL2 source was leaked today - got to get this finished SOON
+ - Reimplemented Billboards and Polys with RenderStack
+ - Sped-up exiting (takes about 6 secs now)
+4/10/03
+ - Fixed sky in floor RenderSort bug
+ - Fixed AddPoly sort bug
+ - Fixed Alt-Enter and VidRestart bugs
+ - Implemented r_mode to change vid resolution
+ - Added functionality to unzip to allow quick access of files in a zipfile
+5/10/03
+ - Researching curved surface brush problem and begin a possible solution
+ - Fixed remaining FS problems (DLL loading)
+6/10/03
+ - Given up curved surface brushes for now - perhaps using a ray-triangle intersection test?
+ - Fixed skydome floor
+ - Implemented SetBrushModel
+7/10/03
+ - Sped up closing
+ - Fixed Alt-Tab and Alt-Enter. Implemented RestartD3D
+ - Implemented r_RenderScene to allow easy network debugging
+ - Redesigned entity-entity collision code
+ - Fixed miscellaneous bugs so game will run on other computers
+8/10/03
+ - Fixed BSP Trace bug. (swapped boxmin/boxmax - fixes many bugs)
+ - Redesigned (again) Entity Trace. Completely working now.
+ - Implemented RT_LIGHTNING and the lightning shader
+ - Implemented RT_RAIL_CORE and Billboard.OnlyAlignAxis1
+10/10/03
+ - Implemented deformVertexes
+ - Implemented TraceInlineModel
+11/10/03
+ - RenderStack now removes unused Handles
+ - Render Inline Models, MD3 scaling, BSP Billboards
+ - Fixed Blended Sort problem
+ - Removed tcmod turb as it was causing too many problems
+ - Sped-up c_Quicksort deletion
+12/10/03
+ - Implemented RenderDeviceInfo and looked again at Gamma bug
+ - Fixed Console text render bug
+ - Implemented GetDirectoryListing for PK3
+ - Fixed in-game UI text rendering bug
+ - Fixed scores render bug
+13/10/03
+ - Implemented distance based curve tesselation
+ - Fixed BSP vid_restart bugs
+ - Fixed RS_TSS bug (init with color modulate)
+ - MD3 LODs
+ - Implemented client box trace
+14/10/03
+ - Debugged client box trace (jumppads etc. now work)
+ - Looked again at gamma bug
+23/10/03
+24/10/03
+ - Implemented curved surface trace using a tesselated surface and triangle testing
+ - Fixed shotgun slowdown (skip TraceAABB on zero size boxes)
+ - Debugged curved surface trace - works sufficiently well
+ - Fixed Bad Client Score (CVar Latch)
+ - Fixed vertex lighting banner bug
+25/10/03
+ - Implemented fog. Researched into alphablending and fog as there is a bug.
+26/10/03
+ - Implemented c_Texture and Mipmaps - HUGE speed increase!!
+ - Fixed mipmap bugs
+ - Implemented fog for alphablended textures (had to hack - stupid Microsoft's fault)
+27/10/03
+ - MD3 Fogging
+ - Fixed Fog cull bug
+ - Fixed Skybox fog bug (q3tourney5)
+ - Looked at fogged poly bug, but can't fix it
+ - Fixed UI's pulse and highlight bugs
+ - Fixed wierd Shader bug in q3dm0 (operator precedence - | is higher than ?. Doh)
+28/10/03
+ - Implemented Render To Texture and RT_PORTAL
+29/10/03
+ - Attempted to fix bugs, but gave up
+ - Fixed many UI bugs and network bugs. Nearly complete.
+4/11/03
+ - Implemented delta-compressed playerState_t
+5/11/03
+ - Fixed MaxSimultaneousTextures
+ - Fixed Cull None bug in q3dm2
+6/11/03
+ - Got DXQ3 working with Q3Ademo
+7/11/03
+ - First internet game test
+ - Fixed Flisk's render bug in fog
+ - Looked at stuck-in-wall bug
+ - Fixed "Too many sounds" error
+ - Implemented Talking
+ - Implemented networkInfo cvars, ConnectionInfo commands, and cancelling sending of non-recent snapshots
+9/11/03
+ - Delta-compressed usercmd_t
+ - Finally fixed the curved surface player clipping bug (incorrect algorithm for box trace against tri)
+10/11/03
+ - Implemented writing to q3config.cfg
+ - fixed Q3config.cfg compatibility bug with Q3
+ - Implemented command line arguments
+ - Reworked server/client time sync
+ - Fixed railgun render bug
+ - Fixed jumppad strength bug! (needed to implement EntityContact)
+11/11/03
+ - Fixed internet lag sync problems (serverTime mustn't go backwards)
+ - Added extra checking for dedicated server
+ - Fixed small jitter bug on localserver ( disabled usercmd compression )
+12/11/03
+ - Had a successful internet game with Phil!
+ - Fixed win32 input initialisation bug
+15/11/03
+ - Played first 4 player LAN game - many crash bugs
+ - Implemented variable sized Vertex and Index buffers based on r_subdivisions
+ - Implemented better Standard Exception error reporting. Now able to roughly pinpoint the location of any crash
+ - Fixed scores bug with large arg nums
+ - Fixed uninitialised input device crash bug
+16/11/03
+ - Found source of Trace bug! Stupidity. There are two threads accessing DQBSP.Trace. Removed TraceCount.
+ - 4 Player game works fine
+ - Tried to implement variable znear - doesn't work, as gun is close to screen and cannot easily be drawn separately

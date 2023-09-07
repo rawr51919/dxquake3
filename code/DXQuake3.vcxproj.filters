@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Render">
+      <UniqueIdentifier>{43017bcc-9103-4b72-9315-ab051dc2c3f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\BSP">
+      <UniqueIdentifier>{bba2e2b3-7ccd-4ded-9ab8-453b35c9cab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\BSP\BSP Source Files">
+      <UniqueIdentifier>{9218eceb-1836-4bf9-b844-b701a8f4db45}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Render\BSP\BSP Header Files">
+      <UniqueIdentifier>{89700549-d03b-4fb2-b6ef-aa0332d1fd78}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Render\Model">
+      <UniqueIdentifier>{b4b2d4ec-2214-4906-b822-c225fdd48d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Model\Model Source">
+      <UniqueIdentifier>{872d9a5a-ca05-49d9-82bf-df2d9aedfe37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Model\Model Header">
+      <UniqueIdentifier>{3fb07fc3-625e-4ed4-9a4d-4a780159e931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Shader">
+      <UniqueIdentifier>{5ad8b5a6-ff7b-42b7-8276-0f97c7f72aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Shader\Shader Source">
+      <UniqueIdentifier>{8b54cc94-bac4-44d7-b887-08b4925f70c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Shader\Shader Header">
+      <UniqueIdentifier>{50be76bd-ffca-47e2-9440-d3f013491860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Source Files">
+      <UniqueIdentifier>{1475237c-6d49-49b0-9718-49afd8c299b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\Header Files">
+      <UniqueIdentifier>{84144f8c-cf04-4dc4-92ac-7196e49db505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputOutput">
+      <UniqueIdentifier>{23e93230-b696-4e9c-b6b7-3acf95d9c1be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputOutput\IO Source Files">
+      <UniqueIdentifier>{ce0342ac-621f-4f7f-8b86-6ec00f677a28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputOutput\IO Header Files">
+      <UniqueIdentifier>{9e513d61-9001-4ff6-82b5-e4724088c46b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{f7cb3d8a-97fe-4ad9-bdaf-d6c944bc02b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Q3 Files">
+      <UniqueIdentifier>{ccc4e790-2b54-49ee-89f4-04280f62f49e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Q3 Interface">
+      <UniqueIdentifier>{72c3f83e-022a-482c-abcc-4458820f94f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Q3 Interface\Q3I Source Files">
+      <UniqueIdentifier>{5670f8a9-d811-41f4-9ccc-4d015e6ab7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Q3 Interface\Q3I Header Files">
+      <UniqueIdentifier>{0374333e-5b7c-4e53-b6fc-480bd8ddda6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{d60256c1-05b5-4387-90a3-c8148d98ebdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib">
+      <UniqueIdentifier>{07c6b621-1755-4d2e-ad42-393063dba9fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib\Headers">
+      <UniqueIdentifier>{64a623d4-18f7-406c-b09a-d5f85627b1f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zlib\C Files">
+      <UniqueIdentifier>{1630d2f9-c2ad-4a30-9cfd-4293b4d20850}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c_BSP.cpp">
+      <Filter>Render\BSP\BSP Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_BSP2.cpp">
+      <Filter>Render\BSP\BSP Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_CurvedSurface.cpp">
+      <Filter>Render\BSP\BSP Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_MD3.cpp">
+      <Filter>Render\Model\Model Source</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Model.cpp">
+      <Filter>Render\Model\Model Source</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Skin.cpp">
+      <Filter>Render\Model\Model Source</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Shader.cpp">
+      <Filter>Render\Shader\Shader Source</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Shader2.cpp">
+      <Filter>Render\Shader\Shader Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFuncs.cpp">
+      <Filter>Render\Shader\Shader Source</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Camera.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Render.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Render2.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Render3.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_RenderStack.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Texture.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DStreams.cpp">
+      <Filter>Render\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Console.cpp">
+      <Filter>InputOutput\IO Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_FS.cpp">
+      <Filter>InputOutput\IO Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Input.cpp">
+      <Filter>InputOutput\IO Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Sound.cpp">
+      <Filter>InputOutput\IO Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_SoundManager.cpp">
+      <Filter>InputOutput\IO Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Command.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Exception.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Memory.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Time.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Q3\q_shared.cpp">
+      <Filter>Q3 Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_ClientGame.cpp">
+      <Filter>Q3 Interface\Q3I Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_ClientGame2.cpp">
+      <Filter>Q3 Interface\Q3I Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Game.cpp">
+      <Filter>Q3 Interface\Q3I Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Game2.cpp">
+      <Filter>Q3 Interface\Q3I Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_UI.cpp">
+      <Filter>Q3 Interface\Q3I Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Snapshot.cpp">
+      <Filter>Q3 Interface\Q3I Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Client.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Network.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="c_Server.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="usercmd.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\adler32.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\compress.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\crc32.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\deflate.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infblock.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infcodes.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inffast.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inflate.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\inftrees.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\infutil.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\maketree.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\trees.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\uncompr.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\contrib\minizip\unzip.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zlib\zutil.c">
+      <Filter>zlib\C Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="c_BSP.h">
+      <Filter>Render\BSP\BSP Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_BSPInlineModel.h">
+      <Filter>Render\BSP\BSP Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_CurvedSurface.h">
+      <Filter>Render\BSP\BSP Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_MD3.h">
+      <Filter>Render\Model\Model Header</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Model.h">
+      <Filter>Render\Model\Model Header</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Skin.h">
+      <Filter>Render\Model\Model Header</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Shader.h">
+      <Filter>Render\Shader\Shader Header</Filter>
+    </ClInclude>
+    <ClInclude Include="c_ShaderCommand.h">
+      <Filter>Render\Shader\Shader Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFuncs.h">
+      <Filter>Render\Shader\Shader Header</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Camera.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Quicksort.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Render.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_RenderStack.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Texture.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DStreams.h">
+      <Filter>Render\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Console.h">
+      <Filter>InputOutput\IO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_FS.h">
+      <Filter>InputOutput\IO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Input.h">
+      <Filter>InputOutput\IO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Sound.h">
+      <Filter>InputOutput\IO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_SoundManager.h">
+      <Filter>InputOutput\IO Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="assert.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Chain.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Command.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Memory.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Queue.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Singleton.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Time.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\be_aas.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\cg_public.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\g_public.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\keycodes.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\q_shared.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\surfaceflags.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\tr_types.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Q3\ui_public.h">
+      <Filter>Q3 Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_ClientGame.h">
+      <Filter>Q3 Interface\Q3I Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Game.h">
+      <Filter>Q3 Interface\Q3I Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_UI.h">
+      <Filter>Q3 Interface\Q3I Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c_Network.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\deflate.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\infblock.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\infcodes.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffast.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inffixed.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\inftrees.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\infutil.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\trees.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\contrib\minizip\unzip.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zconf.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\contrib\minizip\zip.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zlib.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="zlib\zutil.h">
+      <Filter>zlib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Render\BSP\BSP Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dxq3.ico" />
+    <None Include="To Do.txt" />
+    <None Include="Work Log.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Script1.rc">
+      <Filter>Render\BSP\BSP Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

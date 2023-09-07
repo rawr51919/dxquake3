@@ -29,7 +29,7 @@ c_Time::c_Time() {
 	{
 		usePerformanceCounter = FALSE;
 
-		initGTCTime = GetTickCount();
+		initGTCTime = GetTickCount64();
 		lastGTCTime = initGTCTime;
 	}
 	LastFrameTime = 0.05f;		//Default : 20fps
@@ -66,7 +66,7 @@ void c_Time::NextFrame()
 	}
 	else
 	{
-		currentTickCount = GetTickCount();
+		currentTickCount = GetTickCount64();
 		LastFrameTime = (float)(currentTickCount - lastGTCTime);
 		lastGTCTime = currentTickCount;
 	}
@@ -85,7 +85,7 @@ int c_Time::GetMillisecs()
 	}
 	else
 	{
-		currentTickCount = GetTickCount();
+		currentTickCount = GetTickCount64();
 		return (currentTickCount-initGTCTime);
 	}
 }
@@ -173,11 +173,11 @@ void c_Time::ProfileMarkFrame()
 		SectionTimeCount = 0;
 		for(int i=0;i<NumSections;++i) SectionTimeCount += ProfileSectionTotal[i];
 
-		sprintf(buffer, "-----------------------------------\nFrame %d - Time taken \t%f\t\tMissing Time %f (%.1f%%)\t\tNum D3D Calls %d\n", DQRender.FrameNum, CurrentTime, CurrentTime-SectionTimeCount, (CurrentTime-SectionTimeCount)/CurrentTime*100.0f, DQRender.NumD3DCalls);
+		sprintf_s(buffer, "-----------------------------------\nFrame %d - Time taken \t%f\t\tMissing Time %f (%.1f%%)\t\tNum D3D Calls %d\n", DQRender.FrameNum, CurrentTime, CurrentTime-SectionTimeCount, (CurrentTime-SectionTimeCount)/CurrentTime*100.0f, DQRender.NumD3DCalls);
 		fwrite(buffer, strlen(buffer), 1, file);
 	}
 
-	sprintf( ProfileTimeString[0], "FPS : %.2f     Time ms %f", 1000.0f/LastFrameTime, LastFrameTime);
+	sprintf_s( ProfileTimeString[0], "FPS : %.2f     Time ms %f", 1000.0f/LastFrameTime, LastFrameTime);
 
 	for(int i=0;i<NumSections;++i) {
 		if(ProfileSectionCallsPerFrame[i]==0) continue;
@@ -189,7 +189,7 @@ void c_Time::ProfileMarkFrame()
 		ProfileSectionTimePerFrame[i] = 0.0f;
 		ProfileSectionCallsPerFrame[i] = 0;
 
-		sprintf( ProfileTimeString[i+1], "%s \tSection %-d Calls : %d \tTotal : %-f Time per call : %-f Min : %-f Max : %-f\n", ProfileSectionName[i], i, ProfileNumCalls[i], ProfileSectionTotal[i], ProfileSectionTotal[i]/ProfileNumCalls[i], ProfileSectionMin[i], ProfileSectionMax[i] );
+		sprintf_s( ProfileTimeString[i+1], "%s \tSection %-d Calls : %d \tTotal : %-f Time per call : %-f Min : %-f Max : %-f\n", ProfileSectionName[i], i, ProfileNumCalls[i], ProfileSectionTotal[i], ProfileSectionTotal[i]/ProfileNumCalls[i], ProfileSectionMin[i], ProfileSectionMax[i] );
 
 		if(ProfileLogEveryFrame) {
 			fwrite(ProfileTimeString[i+1], strlen(ProfileTimeString[i+1]), 1, file);
@@ -269,7 +269,7 @@ void c_Time::SynchronizeTime( double SynchronizeTime )
 	}
 	else
 	{
-		currentTickCount = GetTickCount();
+		currentTickCount = GetTickCount64();
 		initGTCTime = currentTickCount - SynchronizeTime;
 	}
 }

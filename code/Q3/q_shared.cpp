@@ -11,7 +11,7 @@ void QDECL Com_Error ( int level, const char *error, ... ) {
 	char		text[1024];
 
 	va_start (argptr, error);
-	vsprintf (text, error, argptr);
+	vsprintf_s (text, error, argptr);
 	va_end (argptr);
 
 	Error(ERR_MISC, text);
@@ -22,7 +22,7 @@ void QDECL Com_Printf( const char *msg, ... ) {
 	char		text[1024];
 
 	va_start (argptr, msg);
-	vsprintf (text, msg, argptr);
+	vsprintf_s (text, msg, argptr);
 	va_end (argptr);
 
 	DQConsole.Print(text);
@@ -160,7 +160,7 @@ int	LongNoSwap (int l)
 
 qint64 Long64Swap (qint64 ll)
 {
-	qint64	result;
+	qint64	result{};
 
 	result.b0 = ll.b7;
 	result.b1 = ll.b6;
@@ -186,7 +186,7 @@ typedef union {
 
 float FloatSwap (const float *f) {
 	const _FloatByteUnion *in;
-	_FloatByteUnion out;
+	_FloatByteUnion out{};
 
 	in = (_FloatByteUnion *)f;
 	out.i = LongSwap(in->i);
@@ -270,7 +270,7 @@ void __cdecl COM_ParseError( char *format, ... )
 	static char string[4096];
 
 	va_start (argptr, format);
-	vsprintf (string, format, argptr);
+	vsprintf_s (string, format, argptr);
 	va_end (argptr);
 
 	Com_Printf("ERROR: %s, line %d: %s\n", com_parsename, com_lines, string);
@@ -282,7 +282,7 @@ void __cdecl COM_ParseWarning( char *format, ... )
 	static char string[4096];
 
 	va_start (argptr, format);
-	vsprintf (string, format, argptr);
+	vsprintf_s (string, format, argptr);
 	va_end (argptr);
 
 	Com_Printf("WARNING: %s, line %d: %s\n", com_parsename, com_lines, string);
@@ -880,7 +880,7 @@ void QDECL Com_sprintf( char *dest, int size, const char *fmt, ...) {
 	char	bigbuffer[32000];	// big, but small enough to fit in PPC stack
 
 	va_start (argptr,fmt);
-	len = vsprintf (bigbuffer,fmt,argptr);
+	len = vsprintf_s (bigbuffer,fmt,argptr);
 	va_end (argptr);
 	if ( len >= sizeof( bigbuffer ) ) {
 		Com_Error( ERR_FATAL, "Com_sprintf: overflowed bigbuffer" );
@@ -941,7 +941,7 @@ FIXME: overflow check?
 ===============
 */
 char *Info_ValueForKey( const char *s, const char *key ) {
-	char	pkey[BIG_INFO_KEY];
+	char	pkey[BIG_INFO_KEY]{};
 	static	char value[2][BIG_INFO_VALUE];	// use two buffers so compares
 											// work without stomping on each other
 	static	int	valueindex = 0;
@@ -1038,8 +1038,8 @@ Info_RemoveKey
 */
 void Info_RemoveKey( char *s, const char *key ) {
 	char	*start;
-	char	pkey[MAX_INFO_KEY];
-	char	value[MAX_INFO_VALUE];
+	char	pkey[MAX_INFO_KEY]{};
+	char	value[MAX_INFO_VALUE]{};
 	char	*o;
 
 	if ( strlen( s ) >= MAX_INFO_STRING ) {
@@ -1093,8 +1093,8 @@ Info_RemoveKey_Big
 */
 void Info_RemoveKey_Big( char *s, const char *key ) {
 	char	*start;
-	char	pkey[BIG_INFO_KEY];
-	char	value[BIG_INFO_VALUE];
+	char	pkey[BIG_INFO_KEY]{};
+	char	value[BIG_INFO_VALUE]{};
 	char	*o;
 
 	if ( strlen( s ) >= BIG_INFO_STRING ) {

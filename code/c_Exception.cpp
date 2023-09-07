@@ -61,7 +61,7 @@ const char * c_Exception::GetExceptionText()
 void c_Console::ProcessError( c_Exception &ErrorMessage, int Line, char *File )
 {
 	char Text[1001];
-	sprintf(Text, "^1%s - Line : %d File : %s\n",ErrorMessage.GetExceptionText(),Line,File);
+	sprintf_s(Text, "^1%s - Line : %d File : %s\n",ErrorMessage.GetExceptionText(),Line,File);
 
 #if _DEBUG
 	OutputDebugString( Text );

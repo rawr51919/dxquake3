@@ -52,7 +52,7 @@ void c_Render::DrawSprite(float x, float y, float w, float h, float s1, float t1
 	static DWORD Diffuse[6];
 	static D3DXVECTOR3 Pos[6];
 	static D3DXVECTOR2 Tex[6];
-	static count = 0;
+	static int count = 0;
 
 	if( !r_RenderScene.integer ) return;
 

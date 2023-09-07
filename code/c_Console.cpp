@@ -31,14 +31,14 @@ c_Console::c_Console():ClientCommandBuffer(MAX_COMMANDBUFFER),ServerCommandBuffe
 
 	ShowConsoleState = eShowConsoleNone;
 	ConsoleShader = 0;
-	for(i=0;i<MAX_CONSOLELINES;++i) ConsoleText[i][0] = '\0';
+	for(int i=0;i<MAX_CONSOLELINES;++i) ConsoleText[i][0] = '\0';
 	ConsoleTextNextLine = 0;
 	ConsoleTextCurrentInput[0] = '\0';
 	CurrentInputPos = 0;
 	ConsoleCaratPos = 0;
 	LocalServer = FALSE;
 	ShowConsoleTimer = 0;
-	for(i=0;i<MAX_CONSOLEREDO;++i) ConsoleTextPreviousCommands[i][0] = '\0';
+	for(int i=0;i<MAX_CONSOLEREDO;++i) ConsoleTextPreviousCommands[i][0] = '\0';
 	ConsoleRedoNextPos = 0;
 	ConsoleRedoSelected = 0;
 	ConsoleLineDisplayOffset = 0;
@@ -606,7 +606,7 @@ void c_Console::UpdateCVar(vmCvar_t *vmCVar ) {
 
 int c_Console::FindCVarFromName(const char *Name)
 {
-	static cachedCVars[10] = { 0,0,0,0,0,0,0,0,0,0 };
+	static intptr_t cachedCVars[10] = { 0,0,0,0,0,0,0,0,0,0 };
 	static int cacheNum = 0;
 	int i,j;
 
@@ -692,7 +692,7 @@ void c_Console::SetCVarString( const int index, const char *value, eAuthority Au
 void c_Console::SetCVarValue( const char *name, float value, eAuthority Authority )
 {
 	char string[MAX_CVAR_VALUE_STRING];
-	sprintf(string, "%f",value);
+	sprintf_s(string, "%f",value);
 	SetCVarString( name, string, Authority );
 }
 
@@ -1361,8 +1361,8 @@ void c_Console::WriteConfigFile()
 		if(!buffer[0]) continue;
 		DQInput.GetKeynumString( i, buffer2, MAX_STRING_CHARS );
 		//For compatibility with Quake3, make a to z in lower case, all else in upper case
-		if(i>=97 && i<=122) strlwr( buffer2 );
-		else strupr( buffer2 );
+		if(i>=97 && i<=122) _strlwr_s( buffer2 );
+		else _strupr_s( buffer2 );
 		pText = va("bind %s \"%s\"\n",buffer2,buffer);
 		DQFS.WriteFile( pText, 1, DQstrlen(pText, MAX_STRING_CHARS), Q3cfg );
 	}
