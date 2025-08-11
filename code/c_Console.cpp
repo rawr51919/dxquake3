@@ -31,14 +31,14 @@ c_Console::c_Console():ClientCommandBuffer(MAX_COMMANDBUFFER),ServerCommandBuffe
 
 	ShowConsoleState = eShowConsoleNone;
 	ConsoleShader = 0;
-	for(int i=0;i<MAX_CONSOLELINES;++i) ConsoleText[i][0] = '\0';
+	for(i=0;i<MAX_CONSOLELINES;++i) ConsoleText[i][0] = '\0';
 	ConsoleTextNextLine = 0;
 	ConsoleTextCurrentInput[0] = '\0';
 	CurrentInputPos = 0;
 	ConsoleCaratPos = 0;
 	LocalServer = FALSE;
 	ShowConsoleTimer = 0;
-	for(int i=0;i<MAX_CONSOLEREDO;++i) ConsoleTextPreviousCommands[i][0] = '\0';
+	for(i=0;i<MAX_CONSOLEREDO;++i) ConsoleTextPreviousCommands[i][0] = '\0';
 	ConsoleRedoNextPos = 0;
 	ConsoleRedoSelected = 0;
 	ConsoleLineDisplayOffset = 0;
@@ -93,7 +93,7 @@ void c_Console::Print(const char *text, BOOL bNoAutoNewline )
 		if(text[len-1]!='\n')
 			fwrite("\n", sizeof(char), 1, LogFile);
 		do {
-			
+
 			pos += DQCopyUntil( ConsoleText[ConsoleTextNextLine++], &text[pos], '\n', MAX_CONSOLELINELENGTH );
 			if(ConsoleTextNextLine>=MAX_CONSOLELINES) ConsoleTextNextLine = 0;
 			ConsoleText[ConsoleTextNextLine][0] = '\0';
@@ -107,7 +107,7 @@ void c_Console::Print(const char *text, BOOL bNoAutoNewline )
 		DQstrcat( ConsoleText[ConsoleTextNextLine], text, MAX_CONSOLELINELENGTH );
 	}
 
-	//only go to next line if there is a \n 
+	//only go to next line if there is a \n
 	if((bNoAutoNewline && (text[len-1]==10 || text[len-1]==13)) ) {
 		++ConsoleTextNextLine;
 		if(ConsoleTextNextLine>=MAX_CONSOLELINES) ConsoleTextNextLine = 0;
@@ -122,7 +122,7 @@ void c_Console::Initialise()
 	FILEHANDLE Q3cfg;
 	char *buffer;
 	int FileLength;
-	
+
 	DQPrint( va("c_FS::Q3Root = %s", DQFS.Q3Root ) );
 
 	//Execute q3config.cfg
@@ -137,7 +137,7 @@ void c_Console::Initialise()
 	buffer[FileLength] = '\0';
 
 	DQFS.CloseFile(Q3cfg);
-	
+
 	ExecuteCommandString( buffer, FileLength, FALSE );
 	ExecuteCommandsNow();
 
@@ -157,7 +157,7 @@ void c_Console::Initialise()
 	AddTabCommand( "RenderDeviceInfo" );
 	AddTabCommand( "ClientConnectionInfo" );
 	AddTabCommand( "ServerConnectionInfo" );
-	
+
 	RegisterUserInfoVars();
 
 	isLoaded = TRUE;
@@ -197,7 +197,7 @@ BOOL c_Console::ExecuteCommand( c_Command *command, eAuthority Authority )
 		//bind key "bindstring"
 
 		DQWordstrcpy( param1, command->GetArg(1), MAX_STRING_CHARS );
-		if(command->GetNumArgs()<3) 
+		if(command->GetNumArgs()<3)
 			Print("bind key \"bindstring\"");
 		else {
 //			DQStripQuotes( command->GetArg(2), MAX_STRING_CHARS );
@@ -365,7 +365,7 @@ void c_Console::ExecuteString( const char *buffer, int MaxLength, eAuthority Aut
 	posNextLine = pos + DQNextLine(&buffer[pos], MaxLength-pos);
 	pos2 = pos + DQWordstrcpy(word, &buffer[pos], posNextLine+1);
 	while(pos2>pos && pos<MaxLength) {
-		if(word[0] == '\\') DQstrcpy( word, &word[1], MaxLength );	// get rid of preceding \ 
+		if(word[0] == '\\') DQstrcpy( word, &word[1], MaxLength );	// get rid of preceding \
 
 		param1[0] = param2[0] = '\0';
 
@@ -413,7 +413,7 @@ void c_Console::ExecuteString( const char *buffer, int MaxLength, eAuthority Aut
 			//bind key "bindstring"
 
 			if(!param1[0]) Print("bind key \"bindstring\"");
-			else 
+			else
 				DQInput.SetBindingString( param1, param1Length+1, param2, param2Length+1 );
 		}
 		//set is similar to seta
@@ -585,12 +585,12 @@ void c_Console::RegisterCVar( const char *var_name, const char *value, int flags
 
 void c_Console::UpdateCVar(vmCvar_t *vmCVar ) {
 	if(!vmCVar) {
-		Error(ERR_CVAR, "UpdateCVar was passed NULL"); 
+		Error(ERR_CVAR, "UpdateCVar was passed NULL");
 		return;
 	}
-	if(!vmCVar->handle) { 
-//		DQPrint("UpdateCVar : Null Handle given\n"); 
-		return; 
+	if(!vmCVar->handle) {
+//		DQPrint("UpdateCVar : Null Handle given\n");
+		return;
 	}
 	//Get the CVar from the handle
 	int index = vmCVar->handle-1;
@@ -606,7 +606,7 @@ void c_Console::UpdateCVar(vmCvar_t *vmCVar ) {
 
 int c_Console::FindCVarFromName(const char *Name)
 {
-	static intptr_t cachedCVars[10] = { 0,0,0,0,0,0,0,0,0,0 };
+	static cachedCVars[10] = { 0,0,0,0,0,0,0,0,0,0 };
 	static int cacheNum = 0;
 	int i,j;
 
@@ -692,7 +692,7 @@ void c_Console::SetCVarString( const int index, const char *value, eAuthority Au
 void c_Console::SetCVarValue( const char *name, float value, eAuthority Authority )
 {
 	char string[MAX_CVAR_VALUE_STRING];
-	sprintf_s(string, "%f",value);
+	sprintf(string, "%f",value);
 	SetCVarString( name, string, Authority );
 }
 
@@ -876,11 +876,11 @@ void c_Console::ExecuteCommandsNow()
 		CVars
 		UI Console Command
 		if( DQClientGame.isLoaded ) ClientGame Console Command
-		* if( DQGame.isLoaded ) Server Console Commmand
+		* if( DQGame.isLoaded ) Server Console Command
 		* if( isClient ) Send to Server
 
 		SERVER CONSOLE
-		if( DQGame.isLoaded ) Server Console Commmand
+		if( DQGame.isLoaded ) Server Console Command
 
 	  If the string is not recognised, the Game DLL sends an error message
 	*/
@@ -954,7 +954,7 @@ void c_Console::ExecuteCommandString( const char *string, int MaxLength, BOOL Pu
 	c_Command	ReverseOrderCommands[MAX_CONCATENATED_COMMANDS];
 	int			i,numCommands;
 	char		*NextCommand;
-	
+
 	numCommands = 0;
 	NextCommand = (char*)string;
 
@@ -963,7 +963,7 @@ void c_Console::ExecuteCommandString( const char *string, int MaxLength, BOOL Pu
 			NextCommand = ReverseOrderCommands[numCommands].MakeCommandString( NextCommand, MaxLength );
 			++numCommands;
 		}
-		
+
 		//Push the commands to the front of the buffer
 		for(i=0;i<numCommands;++i) {
 			memcpy( ClientCommandBuffer.PushToFront(), &ReverseOrderCommands[numCommands-i], sizeof(c_Command) );
@@ -1074,12 +1074,12 @@ void c_Console::RenderConsole()
 
 	DQRender.SetSpriteColour( NULL );		//defaults to white
 
-	//Render the console as a sprite, with identity View and Projection matricies
+	//Render the console as a sprite, with identity View and Projection matrices
 	DQRender.DrawSprite( 0, 0, vidWidth, ConsoleYHeight, 0,0, 1,1, ConsoleShader );
 
 	//Draw a red line under the console
 	float rgba[4];
-	rgba[0] = 1.0f; rgba[1] = 0.0f; rgba[2] = 0.0f; rgba[3] = 1.0f; 
+	rgba[0] = 1.0f; rgba[1] = 0.0f; rgba[2] = 0.0f; rgba[3] = 1.0f;
 	DQRender.SetSpriteColour( rgba );
 
 	DQRender.DrawSprite( 0, ConsoleYHeight, DQRender.GLconfig.vidWidth, DQRender.GLconfig.vidHeight/160, 0, 0, 0, 0, DQRender.whiteimageShader );
@@ -1136,7 +1136,7 @@ void c_Console::RenderConsole()
 	i = DQstrlen( Signature, 100 )+1;
 	TextYPos = ConsoleYHeight - SMALLCHAR_HEIGHT - 5;
 
-	rgba[0] = 1.0f; rgba[1] = 0.0f; rgba[2] = 0.0f; rgba[3] = 1.0f; 
+	rgba[0] = 1.0f; rgba[1] = 0.0f; rgba[2] = 0.0f; rgba[3] = 1.0f;
 	DQRender.SetSpriteColour( rgba );
 	DQRender.DrawString( DQRender.GLconfig.vidWidth - SMALLCHAR_WIDTH*i, TextYPos, SMALLCHAR_WIDTH, SMALLCHAR_HEIGHT, Signature, MAX_CONSOLELINELENGTH );
 
@@ -1160,7 +1160,7 @@ void c_Console::AddInputChar( char ch )
 	if(ch == 13 /*Enter*/) {
 		Print( va("]%s",ConsoleTextCurrentInput ) );
 		ExecuteCommandString( ConsoleTextCurrentInput, MAX_CONSOLELINELENGTH, FALSE );
-		
+
 		x = DQSkipWhitespace( ConsoleTextCurrentInput, MAX_CONSOLELINELENGTH );
 		if(ConsoleTextCurrentInput[x]!='\0') {
 			DQstrcpy( ConsoleTextPreviousCommands[ConsoleRedoNextPos], ConsoleTextCurrentInput, MAX_CONSOLELINELENGTH );
@@ -1224,7 +1224,7 @@ void c_Console::InputKey( int KeyPressed )
 	case K_DOWNARROW:
 		//Next Command
 		if(ConsoleTextPreviousCommands[ConsoleRedoSelected][0]=='\0') return;	//do nothing if no further previous commands
-		
+
 		x = ConsoleRedoSelected+1;
 		if(x>=MAX_CONSOLEREDO) x = 0;
 
@@ -1286,7 +1286,7 @@ void c_Console::ShowConsole( eShowConsole State )
 void c_Console::RunLocalServer( BOOL RunLocalServer )
 {
 	LocalServer = RunLocalServer;
-	SetCVarString("sv_running", (LocalServer)?"1":"0", eAuthServer);	
+	SetCVarString("sv_running", (LocalServer)?"1":"0", eAuthServer);
 }
 
 void c_Console::Disconnect()
@@ -1333,7 +1333,7 @@ void c_Console::ConnectToServer(char *ServerName, int MaxLength)
 		//connect to remote server
 		RunLocalServer( FALSE );
 	}
-	
+
 	//Connect client to server
 	DQNetwork.ConnectToServer(ServerName);
 }
@@ -1349,10 +1349,10 @@ void c_Console::WriteConfigFile()
 		return;
 	}
 
-	pText = va("// Generated by DXQuake3 \n"), 
+	pText = va("// Generated by DXQuake3 \n"),
 	DQFS.WriteFile( pText, 1, DQstrlen(pText, MAX_STRING_CHARS), Q3cfg );
 
-	pText = va("unbindall\n"), 
+	pText = va("unbindall\n"),
 	DQFS.WriteFile( pText, 1, DQstrlen(pText, MAX_STRING_CHARS), Q3cfg );
 
 	//write bind strings
@@ -1361,8 +1361,8 @@ void c_Console::WriteConfigFile()
 		if(!buffer[0]) continue;
 		DQInput.GetKeynumString( i, buffer2, MAX_STRING_CHARS );
 		//For compatibility with Quake3, make a to z in lower case, all else in upper case
-		if(i>=97 && i<=122) _strlwr_s( buffer2 );
-		else _strupr_s( buffer2 );
+		if(i>=97 && i<=122) strlwr( buffer2 );
+		else strupr( buffer2 );
 		pText = va("bind %s \"%s\"\n",buffer2,buffer);
 		DQFS.WriteFile( pText, 1, DQstrlen(pText, MAX_STRING_CHARS), Q3cfg );
 	}
@@ -1384,7 +1384,7 @@ void c_Console::ProcessCommandLine( char *lpCmdLine )
 	char CommandString[MAX_STRING_CHARS];
 
 	if( !lpCmdLine || !lpCmdLine[0] ) return;
-	
+
 	pos = 0;
 	do {
 		pos += DQSkipWhitespace( &lpCmdLine[pos], MAX_STRING_CHARS );

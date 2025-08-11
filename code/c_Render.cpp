@@ -97,7 +97,7 @@ void c_Render::LoadWindow() {
 	//Register Window class and open a window
 	WNDCLASSEX wcex;
 
-	wcex.cbSize = sizeof(WNDCLASSEX); 
+	wcex.cbSize = sizeof(WNDCLASSEX);
 
 	wcex.style			= CS_OWNDC | CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc	= (WNDPROC)WndProc;
@@ -170,7 +170,7 @@ void c_Render::ResetD3DDevice(BOOL ForceWindowedMode)
 	//Select D3D Device
 	ZeroMemory(&D3DPresentParameters, sizeof(D3DPRESENT_PARAMETERS));
 	D3DPresentParameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
-    D3DPresentParameters.BackBufferCount = 1; 
+    D3DPresentParameters.BackBufferCount = 1;
     D3DPresentParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE; //Immediate = no v_sync, default = v_sync
 	D3DPresentParameters.MultiSampleType = D3DMULTISAMPLE_NONE;
 
@@ -214,7 +214,7 @@ void c_Render::ResetD3DDevice(BOOL ForceWindowedMode)
 
 	//Enable D3D's Automatic Depth Buffer
 	D3DPresentParameters.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
-	D3DPresentParameters.EnableAutoDepthStencil = TRUE; 
+	D3DPresentParameters.EnableAutoDepthStencil = TRUE;
     D3DPresentParameters.AutoDepthStencilFormat = D3DFMT_D16;
 	D3DPresentParameters.Flags = D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
 	D3DPresentParameters.hDeviceWindow = hWnd;
@@ -227,7 +227,7 @@ void c_Render::ResetD3DDevice(BOOL ForceWindowedMode)
 		if( FAILED( Direct3D9->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
 			D3DCREATE_MIXED_VERTEXPROCESSING, &D3DPresentParameters, &device) ))
 		if( FAILED( Direct3D9->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-			D3DCREATE_SOFTWARE_VERTEXPROCESSING, &D3DPresentParameters, &device) )) 
+			D3DCREATE_SOFTWARE_VERTEXPROCESSING, &D3DPresentParameters, &device) ))
 		{
 			Error( ERR_RENDER, va("Unable to use video mode %d x %d",D3DDisplayMode.Width,D3DDisplayMode.Height) );
 			D3DPresentParameters.BackBufferWidth = GLconfig.vidWidth = D3DDisplayMode.Width = 640;
@@ -235,7 +235,7 @@ void c_Render::ResetD3DDevice(BOOL ForceWindowedMode)
 			DQConsole.SetCVarValue( "r_mode", 3, eAuthClient );
 
 			if( FAILED( Direct3D9->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-				D3DCREATE_SOFTWARE_VERTEXPROCESSING, &D3DPresentParameters, &device) )) 
+				D3DCREATE_SOFTWARE_VERTEXPROCESSING, &D3DPresentParameters, &device) ))
 			{
 				CriticalError(ERR_RENDER, "Could not create Direct3D Device - Incompatible graphics card");
 				return;
@@ -246,7 +246,7 @@ void c_Render::ResetD3DDevice(BOOL ForceWindowedMode)
 		//vidrestart
 		hr = device->TestCooperativeLevel();
 		if( (hr != D3D_OK) && (hr != D3DERR_DEVICENOTRESET) ) {
-			CriticalError( ERR_RENDER, "Unable to reaquire D3D Device" );
+			CriticalError( ERR_RENDER, "Unable to reacquire D3D Device" );
 		}
 
 		if( FAILED( hr = device->Reset( &D3DPresentParameters ) ) ) {
@@ -304,7 +304,7 @@ void c_Render::InitialiseD3D()
 	D3DGAMMARAMP GammaRamp, CurrentGammaRamp;
 	int i, Overbrighten;
 	WORD val;
-	
+
 	Overbrighten = DQConsole.OverbrightBits;
 	Overbrighten = 1<<Overbrighten;
 	for(i=0;i<256;++i) {
@@ -378,10 +378,10 @@ void c_Render::InitialiseD3D()
 		}
 		if(hr == D3D_OK)
 			bCaps_AutogenMipmaps = TRUE;
-		else 
+		else
 			bCaps_AutogenMipmaps = FALSE;
 	}
-	else 
+	else
 		bCaps_AutogenMipmaps = FALSE;
 
 	bCaps_SrcBlendfactor = (Caps.SrcBlendCaps&D3DPBLENDCAPS_BLENDFACTOR)?TRUE:FALSE;
@@ -466,8 +466,8 @@ void c_Render::InitialiseD3D()
 	d3dcheckOK( device->SetRenderState( D3DRS_AMBIENT, 0xFF444444 ) );
 #endif
 //	d3dcheckOK( device->SetRenderState( D3DRS_AMBIENT, 0xFF777777 ) );
-	
-	//HACK - Any dynamic lighting is ADDED instead of MULTIPLED (creates realistic lights which saturate the texture)
+
+	//HACK - Any dynamic lighting is ADDED instead of MULTIPLIED (creates realistic lights which saturate the texture)
 	d3dcheckOK( device->SetRenderState( D3DRS_AMBIENT, 0 ) );
 	for(i=0;i<8;++i) {
 		d3dcheckOK( device->SetTextureStageState( i, D3DTSS_ALPHAOP, D3DTOP_MODULATE ) );
@@ -486,7 +486,7 @@ void c_Render::InitialiseD3D()
 	d3dcheckOK( DQDevice->SetRenderState( D3DRS_LIGHTING, FALSE ) );
 	d3dcheckOK( device->SetRenderState( D3DRS_SPECULARENABLE, FALSE ) );
 	d3dcheckOK( device->SetRenderState( D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_MATERIAL ) );
-	d3dcheckOK( device->SetRenderState( D3DRS_AMBIENTMATERIALSOURCE, D3DMCS_MATERIAL ) );	
+	d3dcheckOK( device->SetRenderState( D3DRS_AMBIENTMATERIALSOURCE, D3DMCS_MATERIAL ) );
 	d3dcheckOK( device->SetRenderState( D3DRS_FOGTABLEMODE, D3DFOG_EXP ) );
 	float Zero = 0.0f;
 	d3dcheckOK( device->SetRenderState( D3DRS_FOGSTART, *((DWORD*)&Zero) ) );
@@ -502,7 +502,7 @@ void c_Render::InitialiseD3D()
 	DefaultMaterial.Power	 = 100.0f;
 	d3dcheckOK( device->SetMaterial( &DefaultMaterial ) );
 
-	
+
 	ZeroMemory( &CurrentRS, sizeof(s_RenderState) );
 
 	//******End Init Direct3D State************************************************
@@ -565,7 +565,7 @@ void c_Render::VidRestart()
 	if( DQClientGame.isLoaded || DQClientGame.LoadMe) isInGame = TRUE;
 	else isInGame = FALSE;
 
-//	OldHWnd = hWnd;	
+//	OldHWnd = hWnd;
 //	LoadWindow();
 
 //	DestroyWindow(OldHWnd);
@@ -588,7 +588,7 @@ void c_Render::VidRestart()
 	DQUI.Initialise();
 
 	if( isInGame ) {
-		DQClientGame.Load();	
+		DQClientGame.Load();
 	}
 
 	//Load DQUI.Connect after ClientGame as it checks DQClientGame.isLoaded
@@ -619,7 +619,7 @@ void c_Render::LoadShaders()
 		//Create shaderlist.txt
 		buffer = (char*)DQNewVoid( char[10000] );
 		num = DQFS.GetFileList( "scripts", "shader", buffer, 10000, FALSE );
-		
+
 		ShaderListHandle = DQFS.OpenFile( "scripts\\shaderlist.txt", "w+b");
 		if(!ShaderListHandle) {
 			ShaderListHandle = DQFS.OpenFile( "c:\\shaderlist.txt", "w+b");
@@ -631,7 +631,7 @@ void c_Render::LoadShaders()
 		//Parse file list
 		pos = 0;
 		for(i=0;i<num;++i) {
-			sprintf_s( filename, "%s",&buffer[pos] );
+			sprintf( filename, "%s",&buffer[pos] );
 			DQStripExtention( filename, MAX_QPATH );
 			DQstrcat( filename, "\n", MAX_QPATH );
 			pos2 = DQstrlen( (char*)filename, MAX_QPATH );
@@ -671,14 +671,14 @@ void c_Render::LoadShaders()
 		}
 		pos += DQSkipWord(&buffer[pos], fileLength-pos);
 	}
-	
+
 	//cleanup
 	DQDeleteArray(buffer);
 }
 
 void c_Render::SetSpriteColour(float *rgba)
 {
-	if(rgba == NULL) { 
+	if(rgba == NULL) {
 		CurrentSpriteInfo.Colour = 0xFFFFFFFF;
 	}
 	else {
@@ -723,7 +723,7 @@ c_Texture *c_Render::OpenTextureFile( char *TextureFilename, BOOL NoMipmaps, int
 			return TextureArray[i];
 		}
 	}
-	
+
 	//Not found - add new texture
 	if( NumTextures>=MAX_TEXTURES ) {
 		Error( ERR_RENDER, "Too many textures" );
@@ -743,11 +743,11 @@ void c_Render::GetSquareArrayDimensions( int *pNumIndices, int *pNumVerts, int T
 	*pNumVerts = square( Tesselation+1 );
 }
 
-//Fills verts to create a tesselated square
+//Fills verts to create a tessellated square
 //Used for skybox creation
 //[in] Direction - normal to square and also used to translate the square by this amount and the square's size
 //[out] everything else
-void c_Render::CreateSquare( D3DXVECTOR3 Direction, D3DXVECTOR3 *Verts, D3DXVECTOR2 *BoxTexCoords, 
+void c_Render::CreateSquare( D3DXVECTOR3 Direction, D3DXVECTOR3 *Verts, D3DXVECTOR2 *BoxTexCoords,
 							WORD *Indices, int Tesselation )
 {
 	static D3DXVECTOR3 YAxis(0,1,0);
@@ -811,9 +811,9 @@ void c_Render::GetDomeArrayDimensions( int *pNumIndices, int *pNumVerts, int Tes
 	*pNumVerts = square( Tesselation+1 )+4;
 }
 
-//Fills verts to create a tesselated square
+//Fills verts to create a tessellated square
 //Used for skydome creation
-void c_Render::CreateDome( float radius, int CloudHeight, D3DXVECTOR3 *Verts, D3DXVECTOR2 *TexCoords, 
+void c_Render::CreateDome( float radius, int CloudHeight, D3DXVECTOR3 *Verts, D3DXVECTOR2 *TexCoords,
 							WORD *Indices, int Tesselation, float TexCoordScale )
 {
 	int i, u, IndexNum;
@@ -834,7 +834,7 @@ void c_Render::CreateDome( float radius, int CloudHeight, D3DXVECTOR3 *Verts, D3
 
 			TexCoords->x = (scale*(theta - D3DX_PI/2.0f) + D3DX_PI/2.0f) / D3DX_PI * TexCoordScale;
 			TexCoords->y = (scale*(phi - D3DX_PI/2.0f) + D3DX_PI/2.0f) / D3DX_PI * TexCoordScale;
-			
+
 			++Verts;
 			++TexCoords;
 
@@ -947,7 +947,7 @@ BOOL c_Render::CheckOverbright()
 {
 	D3DGAMMARAMP GammaRamp, CurrentGammaRamp;
 	int i,val, Overbrighten;
-	
+
 	if(!isFullscreen) return TRUE;
 
 	Overbrighten = DQConsole.OverbrightBits;

@@ -194,7 +194,7 @@ Shader_AnimMap::Shader_AnimMap(char *line) {
 	//AnimMap takes a variable number of parameters, up to 8, all on the same line
 	NextLine = line + DQNextLine(line, MAX_STRING_CHARS);
 
-	for(int i=0;i<8;++i) {
+	for(i=0;i<8;++i) {
 		NEXTPARAM;
 
 		if(line>=NextLine) { 
@@ -213,11 +213,10 @@ void Shader_AnimMap::Unload() {
 }
 
 void Shader_AnimMap::Initialise() {
-	int i;
 
 	if(Texture[0]) return;
 
-	for(i=0;i<NumTextures;++i) {
+	for(int i=0;i<NumTextures;++i) {
 		Texture[i] = DQRender.OpenTextureFile( TextureFilename[i], (Flags&ShaderFlag_NoMipmaps), OverbrightBits );
 		if(!Texture[i]) break;
 	}

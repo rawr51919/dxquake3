@@ -52,7 +52,7 @@ void c_Render::DrawSprite(float x, float y, float w, float h, float s1, float t1
 	static DWORD Diffuse[6];
 	static D3DXVECTOR3 Pos[6];
 	static D3DXVECTOR2 Tex[6];
-	static int count = 0;
+	static count = 0;
 
 	if( !r_RenderScene.integer ) return;
 
@@ -75,7 +75,7 @@ void c_Render::DrawSprite(float x, float y, float w, float h, float s1, float t1
 	//Create a rectangle at the front of the screen
 	Pos[0].x = x; Pos[0].y = y; Pos[0].z = 0.01f;
 	Tex[0].x = s1; Tex[0].y = t1;
-	
+
 	Pos[1].x = x+w; Pos[1].y = y; Pos[1].z = 0.01f;
 	Tex[1].x = s2; Tex[1].y = t1;
 
@@ -93,7 +93,7 @@ void c_Render::DrawSprite(float x, float y, float w, float h, float s1, float t1
 	Tex[5].x = s1; Tex[5].y = t2;
 
 	Diffuse[0] = Diffuse[1] = Diffuse[2] = Diffuse[3] = Diffuse[4] = Diffuse[5] = CurrentSpriteInfo.Colour;
-	
+
 	//Hack for the non in-game menu to stop the RenderStack sorting sprites
 	//This fixes the Multiplayer Map selector menu
 	if( !DQClientGame.isLoaded ) {
@@ -260,7 +260,7 @@ void c_Render::AddLight( D3DXVECTOR3 origin, float radius, D3DCOLORVALUE colour 
 	Light->Attenuation0 = 4.0f;
 	Light->Attenuation1 = 1.0f/radius;
 	Light->Attenuation2 = 1.0f/square(radius);
-	
+
 	d3dcheckOK( device->SetLight( NumLights, &LightArray[NumLights] ) );
 	NumLights++;
 }
@@ -274,7 +274,7 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 
 	//Only draw RF_THIRD_PERSON entities if we're in Draw Third Person Mode
 	if(refEntity->renderfx & RF_THIRD_PERSON) {
-		if(!(DQCamera.renderfx & RF_THIRD_PERSON)) 
+		if(!(DQCamera.renderfx & RF_THIRD_PERSON))
 			return;
 	}
 
@@ -313,7 +313,7 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 	if(refEntity->reType == RT_MODEL) {
 
 		MATRIX mat;
-		
+
 		mat = MakeD3DXMatrixFromQ3(refEntity->axis, refEntity->origin);
 
 		if( refEntity->hModel <= 0 ) return;
@@ -324,14 +324,14 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 		else {
 
 			Model = ModelArray[refEntity->hModel-1];
- 			Model = Model->GetNextRenderInstance();		//Allow for rendering Entities with same ModelHandle, but different modelling matricies and frame time
+ 			Model = Model->GetNextRenderInstance();		//Allow for rendering Entities with same ModelHandle, but different modelling matrices and frame time
 
 			//Inline skins not implemented (refEntity->skinNum)
 			Model->SetSkin( refEntity->customSkin );			//Possible Bug : Multiple Skins for a single model handle, per frame?
 			Model->LoadMD3IntoD3D(refEntity->oldframe, refEntity->frame, 1.0f-refEntity->backlerp);
 
 			DQRenderStack.SetOverrideShader( refEntity->customShader );
-			
+
 			RenderFeature.ShaderRGBA = D3DCOLOR_RGBA(refEntity->shaderRGBA[0], refEntity->shaderRGBA[1], refEntity->shaderRGBA[2], refEntity->shaderRGBA[3]);
 			RenderFeature.ShaderTime = refEntity->shaderTime;
 			RenderFeature.LightmapTexture = NULL;
@@ -341,7 +341,7 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 			RenderFeature.pTM = &mat;
 
 			Model->DrawModel( &RenderFeature );
-			
+
 			return;
 		}
 	}
@@ -400,7 +400,7 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 	//		so I have disabled them
 #ifdef _PORTALS
 	if(refEntity->reType == RT_PORTALSURFACE) {
-		
+
 
 		D3DXVECTOR3 Sep;
 		refdef_t refdef;
@@ -418,11 +418,11 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 			refdef.viewaxis[1][i] = refEntity->axis[1][i];
 			refdef.viewaxis[2][i] = refEntity->axis[2][i];
 		}
-		
+
 		//Find Render Target
 		for(i=0;i<NumRenderToTextures;++i) {
 			Sep = RenderToTexture[i].Position - MakeD3DXVec3FromFloat3(refEntity->origin);
-			if( D3DXVec3LengthSq( &Sep ) < 10000 ) 
+			if( D3DXVec3LengthSq( &Sep ) < 10000 )
 			{
 				//Set RenderToTexture flag
 				RenderToTexture[i].bEnable = TRUE;
@@ -431,7 +431,7 @@ void c_Render::DrawRefEntity(refEntity_t *refEntity)
 				//TODO
 			}
 		}
-		
+
 		return;
 	}
 #endif //_PORTALS
@@ -565,7 +565,7 @@ void c_Render::AddBillboard( s_Billboard *BB )
 	}
 
 	Billboard = &BillboardArray[NumDrawBillboards];
-	
+
 	memcpy( Billboard, BB, sizeof(s_Billboard) );
 
 	Billboard->AveragePosition = D3DXVECTOR3(0,0,0);
@@ -619,7 +619,7 @@ DQProfileSectionStart( 7, "Prepare BB" );
 		SinAngle = D3DXVec3Dot( D3DXVec3Cross( &AdjustedLookAt, &AdjustedLookAt, &BB->Normal ), &BB->Axis1 );
 		if(SinAngle>0)
 			Angle = -(float)acos((float)CosAngle);
-		else 
+		else
 			Angle = (float)acos((float)CosAngle);
 		D3DXMatrixRotationAxis( &RotationMatrix1, &BB->Axis1, Angle );
 
@@ -635,7 +635,7 @@ DQProfileSectionStart( 7, "Prepare BB" );
 			SinAngle = D3DXVec3Dot( D3DXVec3Cross( &CameraLookAt, &CameraLookAt, &AdjustedBillboardNormal ), &AdjustedBillboardAxis2 );
 			if(SinAngle>0)
 				Angle = D3DX_PI - (float)acos((float)CosAngle);
-			else 
+			else
 				Angle = D3DX_PI + (float)acos((float)CosAngle);
 			D3DXMatrixRotationAxis( &RotationMatrix2, &AdjustedBillboardAxis2, Angle );
 
@@ -704,11 +704,11 @@ void c_Render::DrawString( float x, float y, int CharWidth, int CharHeight, char
 		switch(*c) {
 		case ' ': break;
 		case '\n': continue;
-		case '\t': 
-			xpos += 4*CharWidth; 
+		case '\t':
+			xpos += 4*CharWidth;
 			continue;
 		case Q_COLOR_ESCAPE:
-			++i; 
+			++i;
 			++c;
 			switch(*c) {
 			case COLOR_BLACK:	SetSpriteColour( ColourBlack ); break;
